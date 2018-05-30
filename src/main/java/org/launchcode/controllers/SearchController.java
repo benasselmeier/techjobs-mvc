@@ -23,8 +23,19 @@ public class SearchController {
     }
 
     // TODO #1 - Create handler to process search request and display results
+    //
+    // REFER TO CLASS 3 PREP WORK - CONTROLLERS AND ROUTES
+    //
+    // This method needs to take in two parameters, what are they?
+    //  - search type
+    //  - search term
+    //
+    // How do you pass the parameters properly using Spring?
+    //  - maybe by using Thymeleaf
 
-    // I just added this to get the juices flowing tbh
-    //  @RequestMapping(value = "")
+    @RequestMapping(value = "") 
+    public string search(Model model) {
+
+    }
 
 }
