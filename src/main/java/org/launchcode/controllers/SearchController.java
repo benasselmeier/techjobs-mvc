@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,6 +16,8 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping("search")
+    //this request mapping means that all request mappings under this controller will be at [site]/search/[page].
+    //example: localhost:8080/search/[directory]
 public class SearchController {
 
     @RequestMapping(value = "")
@@ -25,17 +29,31 @@ public class SearchController {
     // TODO #1 - Create handler to process search request and display results
     //
     // REFER TO CLASS 3 PREP WORK - CONTROLLERS AND ROUTES
-    //
-    // This method needs to take in two parameters, what are they?
-    //  - search type
-    //  - search term
-    //
-    // How do you pass the parameters properly using Spring?
-    //  - maybe by using Thymeleaf
+    // Video 2 covers passing parameters.
 
-    @RequestMapping(value = "") 
-    public string search(Model model) {
+    //@RequestMapping(value = "search1")
+    //public String search(model Model, @RequestParam String paramType, @RequestParam String paramTerm) {
 
+        //String searchType = paramType.getParameter("searchType");
+        //String searchTerm = paramTerm.getParameter("searchTerm");
+        //return searchType + searchTerm;
+
+    //}
+
+    @RequestMapping(value="searchResults")
+    public String search(Model model, @RequestParam String paramType, @RequestParam String paramTerm) {
+        model.addAttribute("columns", ListController.columnChoices);
+
+        if (paramType.equals("all")) {
+            ArrayList<HashMap<String, String>> jobs = JobData.findByValue(paramType);
+            model.addAttribute("jobs", jobs);
+            return "searchResults";
+
+        } else {
+            ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(paramType, paramTerm);
+            model.addAttribute("jobs", jobs);
+            return "searchResults";
+        }
     }
 
 }
