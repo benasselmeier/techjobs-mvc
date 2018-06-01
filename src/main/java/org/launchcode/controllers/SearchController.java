@@ -31,28 +31,19 @@ public class SearchController {
     // REFER TO CLASS 3 PREP WORK - CONTROLLERS AND ROUTES
     // Video 2 covers passing parameters.
 
-    //@RequestMapping(value = "search1")
-    //public String search(model Model, @RequestParam String paramType, @RequestParam String paramTerm) {
-
-        //String searchType = paramType.getParameter("searchType");
-        //String searchTerm = paramTerm.getParameter("searchTerm");
-        //return searchType + searchTerm;
-
-    //}
-
-    @RequestMapping(value="searchResults")
+    @RequestMapping(value="search")
     public String search(Model model, @RequestParam String paramType, @RequestParam String paramTerm) {
         model.addAttribute("columns", ListController.columnChoices);
 
         if (paramType.equals("all")) {
             ArrayList<HashMap<String, String>> jobs = JobData.findByValue(paramType);
             model.addAttribute("jobs", jobs);
-            return "searchResults";
+            return "search";
 
         } else {
             ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(paramType, paramTerm);
             model.addAttribute("jobs", jobs);
-            return "searchResults";
+            return "search";
         }
     }
 
