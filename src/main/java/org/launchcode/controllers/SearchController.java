@@ -26,22 +26,22 @@ public class SearchController {
         return "search";
     }
 
-    // TODO #1 - Create handler to process search request and display results
+    // TODO #1 - Create handler to process search request and display results - DONE
     //
     // REFER TO CLASS 3 PREP WORK - CONTROLLERS AND ROUTES
     // Video 2 covers passing parameters.
 
-    @RequestMapping(value="search")
-    public String search(Model model, @RequestParam String paramType, @RequestParam String paramTerm) {
+    @RequestMapping(value="results")
+    public String search(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         model.addAttribute("columns", ListController.columnChoices);
 
-        if (paramType.equals("all")) {
-            ArrayList<HashMap<String, String>> jobs = JobData.findByValue(paramType);
+        if (searchType.equals("all")) {
+            ArrayList<HashMap<String, String>> jobs = JobData.findByValue(searchTerm);
             model.addAttribute("jobs", jobs);
             return "search";
 
         } else {
-            ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(paramType, paramTerm);
+            ArrayList<HashMap<String, String>> jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             model.addAttribute("jobs", jobs);
             return "search";
         }
