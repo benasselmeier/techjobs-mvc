@@ -37,10 +37,28 @@
     <hr />
 
     <!-- TODO #2 - Loop over jobs map to display all job fields -->
-    <div th:if="${jobs} and ${jobs.size()}">
+    <div th:fragment="all-jobs" th:if="${jobs} and ${jobs.size()}">
 
-        <table class="job-listing" th:each="job, idx : ${jobs}" th:class="${idx.odd} ? 'odd'">
-            <tr th:href="@{/list/jobs(column=${column},value=${item})}" th:text="${job}">
+        <table th:each="job, idx : ${jobs}" th:class="job-listing">
+            <tr>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}">Position Type</td>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}" th:text="${job.type}"></td>
+            </tr>
+            <tr>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}">Name</td>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}" th:text="${job.name}"></td>
+            </tr>
+            <tr>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}">Employer</td>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}" th:text="${job.employer}"></td>
+            </tr>
+            <tr>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}">Location</td>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}" th:text="${job.location}"></td>
+            </tr>
+            <tr>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}">Core Competency</td>
+                <td th:href="@{/list/jobs(column=${column},value=${item})}" th:text="${job.competency}"></td>
             </tr>
         </table>
 
