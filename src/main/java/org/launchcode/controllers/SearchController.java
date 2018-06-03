@@ -27,9 +27,6 @@ public class SearchController {
     }
 
     // TODO #1 - Create handler to process search request and display results - DONE
-    //
-    // REFER TO CLASS 3 PREP WORK - CONTROLLERS AND ROUTES
-    // Video 2 covers passing parameters.
 
     @RequestMapping(value="results")
     public String search(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
